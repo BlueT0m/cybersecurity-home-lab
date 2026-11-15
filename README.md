@@ -1,51 +1,133 @@
-
 # Cybersecurity Home Lab
 
-## Présentation
+![Status](https://img.shields.io/badge/Status-Completed-success)
+![Platform](https://img.shields.io/badge/Platform-Kali%20Linux-blue)
+![Virtualization](https://img.shields.io/badge/VirtualBox-Lab-orange)
+![Security](https://img.shields.io/badge/Focus-Ethical%20Hacking-red)
 
-Projet personnel de cybersécurité réalisé dans un laboratoire virtuel isolé.
+Laboratoire personnel de cybersécurité conçu pour apprendre les bases du pentest éthique, de la reconnaissance réseau et de l'audit de sécurité.
 
-Objectif : apprendre les méthodes de reconnaissance réseau, d'énumération et d'audit de sécurité.
+---
 
-## Environnement
+## Table of Contents
+
+- Overview
+- Lab Architecture
+- Tools
+- Installation
+- Exercises
+- Findings
+- Project Structure
+- Screenshots
+- Ethics
+- Author
+
+---
+
+## Overview
+
+Ce projet utilise deux machines virtuelles pour construire un environnement de test isolé.
+
+**Objectifs :**
+- Apprendre la reconnaissance réseau.
+- Identifier les ports et services.
+- Analyser les services FTP et SMB.
+- Repérer les mauvaises configurations.
+- Rédiger des rapports d'audit.
+
+## Lab Architecture
+
+| Machine | Operating System | Role |
+|---|---|---|
+| Attacker | Kali Linux | Security testing |
+| Target | Metasploitable 2 | Vulnerable machine |
+
+**Network:** VirtualBox Host-only  
+**Network range:** 192.168.56.0/24
+
+## Tools
 
 - Kali Linux
-- Metasploitable 2
 - Oracle VirtualBox
-- Réseau Host-only
 - Nmap
 - enum4linux
 - smbclient
+- Wireshark
+- Git
 
-## Travaux réalisés
+## Exercises
 
-- Installation et configuration du laboratoire.
-- Configuration du réseau isolé.
-- Reconnaissance réseau avec Nmap.
-- Identification des services et de leurs versions.
-- Vérification de l'accès FTP anonyme.
-- Énumération des partages SMB.
-- Analyse des permissions.
-- Rédaction d'un rapport de sécurité.
+### 1. Network Discovery
 
-## Principaux constats
+- Identification de la machine cible.
+- Vérification de la connectivité.
+- Scan des ports avec Nmap.
+- Identification des versions des services.
 
-- Accès FTP anonyme autorisé.
-- Connexion SMB anonyme autorisée.
-- Partage SMB tmp accessible en lecture.
-- Signature SMB désactivée.
-- Présence d'un service bindshell sur le port 1524.
+### 2. FTP Enumeration
 
-## Rapports
+- Vérification de l'accès anonyme.
+- Inspection du répertoire racine.
+- Documentation des permissions.
 
-Consulter le dossier `reports/` pour les résultats détaillés.
+### 3. SMB Enumeration
 
-## Cadre des tests
+- Identification des partages.
+- Vérification de l'accès anonyme.
+- Analyse du partage `tmp`.
+- Vérification des permissions de lecture.
 
-Tous les tests ont été réalisés sur une machine Metasploitable 2 personnelle, dans un réseau virtuel isolé.
+## Findings
 
-Aucune cible externe n'a été testée.
+| Service | Finding | Risk |
+|---|---|---|
+| FTP | Anonymous access enabled | Medium |
+| SMB | Anonymous session allowed | Medium |
+| SMB | Share `tmp` readable anonymously | Medium |
+| SMB | Signing disabled | Medium |
+| Bindshell | Root shell service detected on port 1524 | Critical |
 
-## Auteur
+Les niveaux de risque sont des estimations initiales. Ils nécessitent une validation technique complémentaire.
 
-Projet personnel d'apprentissage du pentest éthique.
+## Project Structure
+
+```text
+cybersecurity-home-lab/
+├── README.md
+├── documentation/
+├── reports/
+│   ├── rapport-final.md
+│   ├── scan-initial.txt
+│   └── smb-analysis.md
+└── screenshots/
+    ├── virtualbox-lab.png
+    ├── nmap-scan.png
+    └── smb-enumeration.png
+```
+
+## Screenshots
+
+### VirtualBox Lab
+![VirtualBox Lab](screenshots/virtualbox-lab.png)
+
+### Nmap Scan
+![Nmap Scan](screenshots/nmap-scan.png)
+
+### SMB Enumeration
+![SMB Enumeration](screenshots/smb-enumeration.png)
+
+## Ethics
+
+All tests were conducted on a personally controlled Metasploitable 2 virtual machine inside an isolated Host-only network.
+
+Never scan systems without explicit authorization.
+
+## Author
+
+**BlueT0m**
+
+GitHub: https://github.com/BlueT0m
+
+---
+
+Educational project for ethical hacking and penetration testing.
